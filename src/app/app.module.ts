@@ -1,8 +1,10 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -10,7 +12,10 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserAnimationsModule,
+    BrowserModule,
+    AppRoutingModule,
+    ButtonsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
