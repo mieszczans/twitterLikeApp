@@ -5,22 +5,18 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { DashboardComponent } from './content/dashboard/dashboard.component';
-import { WelcomeComponent } from './content/welcome/welcome.component';
 import { CoreModule } from './core/core.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    // DashboardComponent,
-    WelcomeComponent
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
-    // CoreModule,
+    CoreModule,
     ButtonsModule.forRoot()
   ],
   providers: [],
