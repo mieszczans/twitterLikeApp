@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: 'app/content/welcome.module#WelcomeComponent'
+    loadChildren: 'app/content/dashboard/dashboard.module#DashboardModule'
   },
   {
     path: '**',
