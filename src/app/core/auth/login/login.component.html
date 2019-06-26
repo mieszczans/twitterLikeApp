@@ -1,3 +1,20 @@
-<p>
-  login works!
-</p>
+<div class="loginContainer">
+  <h1>Welcome!</h1>
+  <form #logInForm="ngForm" (ngSubmit)="submitForm(logInForm)" [ngClass]="{'was-validated': logInForm.dirty}" novalidate >
+    <div class="form-group">
+      <label for="username">*Username</label>
+      <input type="text" name="username" id="username" class="form-control" placeholder="Username" [(ngModel)]="model.username" #username="ngModel" minlength="5" autocomplete="name" required>
+      <div [hidden]="username.valid || username.pristine" class="invalid-feedback">username not valid</div>
+      <div [hidden]="username.invalid" class="valid-feedback">Looks good</div>
+    </div>
+    <div class="form-group">
+      <label for="password">*Password</label>
+      <input type="password" name="password" id="password" class="form-control" placeholder="Password" autocomplete="off"
+      [(ngModel)]="model.password" #password="ngModel" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*" required>
+      <div [hidden]="password.valid || password.pristine" class="invalid-feedback">Invalid password</div>
+      <div  class="valid-feedback">Greate</div>
+    </div>
+    <small>* required inputs</small>
+      <button type="submit" name="logIn" id="logIn" class="btn btn-primary btn-lg btn-block logIn" [disabled]="logInForm.invalid">Log in</button>
+  </form>
+</div>
