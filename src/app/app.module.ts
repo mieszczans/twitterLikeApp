@@ -5,13 +5,11 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
-import { TopBarComponent } from './shared/top-bar/top-bar.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TopBarComponent
+    AppComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -19,7 +17,7 @@ import { TopBarComponent } from './shared/top-bar/top-bar.component';
     AppRoutingModule,
     CoreModule
   ],
-  entryComponents: [TopBarComponent],
+  entryComponents: [],
   providers: [],
   bootstrap: [AppComponent]
 })
