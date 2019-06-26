@@ -1,3 +1,4 @@
+import { PostListComponent } from './../post-list/post-list.component';
 import { LoginComponent } from './../../core/auth/login/login.component';
 import { DashboardComponent } from './dashboard.component';
 import { NgModule } from '@angular/core';
@@ -7,16 +8,22 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    redirectTo: 'login', pathMatch: 'full'
+    // redirectTo: 'login', pathMatch: 'full',
+    children: [
+      {
+        path: '',
+        component: PostListComponent
+      }
+    ]
   },
   {
     path: 'login',
     component: LoginComponent
   },
-  // {
-  //   path: '404',
-  //   component: NotFoundComponent
-  // }
+  {
+    path: '404',
+    component: NotFoundComponent
+  }
 ];
 
 @NgModule({

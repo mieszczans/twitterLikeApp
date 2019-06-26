@@ -1,3 +1,4 @@
+import { PostListComponent } from './../post-list/post-list.component';
 import { CoreModule } from './../../core/core.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -10,6 +11,6 @@ import { CommonModule } from '@angular/common';
     CoreModule,
     DashboardRoutingModule
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent, PostListComponent]
 })
 export class DashboardModule { }
