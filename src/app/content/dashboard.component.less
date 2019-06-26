@@ -1,0 +1,33 @@
+.topBar {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 38px;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    max-width: 100vw;
+    margin: 0 auto;
+    min-width: 300px;
+}
+
+.logout {
+    grid-row: 1;
+    grid-column: 1/1;
+}
+
+.searchContainer {
+    .form-control {
+        padding-right: 12px;
+        padding-left: 34px;
+    }
+    .icon {
+        position: relative;
+        left: 10px;
+        top: -32px;
+    }
+}
+
+.search {
+    grid-row: 1;
+    grid-column: 2/3;
+}
