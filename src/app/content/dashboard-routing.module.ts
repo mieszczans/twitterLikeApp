@@ -1,8 +1,9 @@
-import { PostListComponent } from './../post-list/post-list.component';
-import { LoginComponent } from './../../core/auth/login/login.component';
-import { DashboardComponent } from './dashboard.component';
+import { NotFoundComponent } from '../core/not-found/not-found.component';
+import { PostListComponent } from './post-list/post-list.component';
+import { LoginComponent } from '../core/auth/login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
   {
