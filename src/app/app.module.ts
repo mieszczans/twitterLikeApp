@@ -17,8 +17,6 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     CoreModule
   ],
-  entryComponents: [],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

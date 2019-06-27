@@ -4,15 +4,17 @@ import { LoginComponent } from '../core/auth/login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
+import { AuthenticateGuard } from '../core/guards/authenticate.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    // redirectTo: 'login', pathMatch: 'full',
+    canActivate: [AuthenticateGuard],
     children: [
       {
-        path: '',
+        path: 'wall',
+        pathMatch: 'full',
         component: PostListComponent
       }
     ]

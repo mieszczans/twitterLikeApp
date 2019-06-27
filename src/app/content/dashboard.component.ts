@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { AuthenticationService } from './../core/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,13 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
   }
 
   logOut() {
-    sessionStorage.clear();
-    this.router.navigateByUrl('login');
+    this.authenticationService.logOut();
   }
 }

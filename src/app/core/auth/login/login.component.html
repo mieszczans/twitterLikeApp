@@ -1,5 +1,8 @@
 <div class="loginContainer">
   <h1>Welcome!</h1>
+  <alert type="danger" [hidden]="!showAlert">
+    <strong>No access!</strong> Check your credentials and try submitting again.
+  </alert>
   <form #logInForm="ngForm" (ngSubmit)="submitForm(logInForm)" [ngClass]="{'was-validated': logInForm.dirty}" novalidate >
     <div class="form-group">
       <label for="username">*Username</label>
