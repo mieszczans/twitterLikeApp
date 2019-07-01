@@ -1,3 +1,5 @@
+import { PostDetailsResolverService } from './services/post-details-resolver.service';
+import { PostDetailsComponent } from './post-details/post-details.component';
 import { NotFoundComponent } from '../core/not-found/not-found.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { LoginComponent } from '../core/auth/login/login.component';
@@ -13,11 +15,20 @@ const routes: Routes = [
     canActivate: [AuthenticateGuard],
     children: [
       {
+        path: '',
+        redirectTo: 'wall'
+      },
+      {
         path: 'wall',
-        pathMatch: 'full',
         component: PostListComponent
       }
     ]
+  },
+  {
+    canActivate: [AuthenticateGuard],
+    path: 'wall/:id',
+    component: PostDetailsComponent,
+    resolve: { postDetails: PostDetailsResolverService},
   },
   {
     path: 'login',
