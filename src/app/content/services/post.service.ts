@@ -41,7 +41,7 @@ export class PostService {
     return this.http.get<IPost[]>(`${this.basicUrl}/posts`);
   }
 
-  getPostDetails(postNumber): Observable <IPost> {
+  getPostDetails(postNumber: number): Observable <IPost> {
     return this.http.get<IPost>(`${this.basicUrl}/posts/${postNumber}`);
   }
 }
