@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { IPost } from '../models/post';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { filter, map, flatMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
@@ -34,6 +34,19 @@ export class PostService {
         )
       )
     );
+  }
+
+  createFakeName(): string {
+    let fakeName = '';
+    const possibleLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const possibleNumbers = '0123456789';
+    for (let i = 0; i < 8; i++) {
+      fakeName += possibleLetters.charAt(Math.floor(Math.random() * possibleLetters.length));
+    }
+    for (let i = 0; i < 3; i++) {
+      fakeName += possibleNumbers.charAt(Math.floor(Math.random() * possibleNumbers.length));
+    }
+    return fakeName;
   }
 
   // HTTP

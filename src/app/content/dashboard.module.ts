@@ -6,17 +6,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
 import { PostDetailsComponent } from './post-details/post-details.component';
-
 @NgModule({
   imports: [
     CommonModule,
     CoreModule,
     DashboardRoutingModule,
-    HttpClientModule
   ],
-  declarations: [DashboardComponent, PostListComponent, PostDetailsComponent],
-  providers: [PostService, PostDetailsResolverService]
+  declarations: [
+    DashboardComponent,
+    PostListComponent,
+    PostDetailsComponent
+  ],
+  providers: [
+    PostService,
+    PostDetailsResolverService
+  ]
 })
 export class DashboardModule { }
