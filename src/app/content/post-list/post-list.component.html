@@ -1,6 +1,9 @@
-<div class="post-list-container" [@getPosts]="(postService.postListOnWall | async)?.length && canBeTriggered">
-  <div class="single-post card card-body" *ngFor="let post of postService.postListOnWall | async" [routerLink]="['/wall', post.id]">
-    <p class="userId">UserId: {{post?.fakeName}}</p>
-    <p class="title">Title: {{post?.title}}</p>
+<ng-container *ngIf="(posts | async) as itemsFromContainer" >
+  <div class="post-list-container" [@showPosts]="itemsFromContainer.length" >
+    <div class="single-post card card-body" *ngFor="let post of itemsFromContainer" [routerLink]="['/wall', post.id]">
+      <p class="userId">UserId: {{post?.fakeName}}</p>
+      <p class="title">Title: {{post?.title}}</p>
+    </div>
   </div>
-</div>
+</ng-container>
+

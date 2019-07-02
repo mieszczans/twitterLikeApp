@@ -3,43 +3,40 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Tweet } from '../models/post';
 import { PostService } from '../services/post.service';
 import { Component, OnInit } from '@angular/core';
-import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import { showPosts } from './post-list.animations';
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.less'],
-  animations: [
-    trigger('getPosts', [
-      transition('* => *', [
-        query('.single-post', style({transform: 'translateX(-100vw)', opacity: 0}), { optional: true }),
-        query(':enter', stagger('1000ms', [
-          animate('500ms', style({transform: 'translateX(0)', opacity: 100})),
-        ]), { optional: true }),
-      ])
-    ])
-  ]
+  animations: [showPosts]
 })
 export class PostListComponent implements OnInit {
   bsModalRef: BsModalRef;
-  public canBeTriggered = true;
+  posts: Observable<Tweet[]>;
   constructor(
     public postService: PostService,
     private modalService: BsModalService
   ) {}
 
   ngOnInit() {
+    this.getPosts();
+  }
+
+  getPosts() {
     this.postService.getPosts().pipe(
       map((posts) => this.mapPostsForFakeName(posts)),
+      map((posts) => posts.reverse()),
     ).subscribe(
-      posts => {
-        const reversed = posts.reverse();
-        this.postService.addPostsToSubject(reversed);
+      (posts) => {
+        this.postService.addPostsToSubject(posts);
       },
-      (err) => {
+      () => {
         this.bsModalRef = this.modalService.show(ErrorModalComponent);
       }
     );
+    this.posts = this.postService.postListOnWall;
   }
 
   mapPostsForFakeName(posts: Tweet[]): Tweet[] {
