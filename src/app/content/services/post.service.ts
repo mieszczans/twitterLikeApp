@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Observable } from 'rxjs/Observable';
-import { IPost } from '../models/post';
+import { Tweet } from '../models/post';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
@@ -10,19 +9,19 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class PostService {
   protected basicUrl = 'https://jsonplaceholder.typicode.com';
+  private postListSubject: BehaviorSubject<Tweet[]> = new BehaviorSubject<Tweet[]>(null);
   public searchValue: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  private postListSubject: BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>(null);
   public originalPostList$ = this.postListSubject.asObservable().pipe();
-  public postListOnWall: Subject<IPost[]> = new Subject();
+  public postListOnWall: Subject<Tweet[]> = new Subject();
 
   constructor(private http: HttpClient) {}
 
-  addPostsToSubject(posts: IPost[]): void {
+  addPostsToSubject(posts: Tweet[]): void {
     this.postListSubject.next(posts);
     this.postListOnWall.next(posts);
   }
 
-  searchPost(searchText: string): Observable<IPost[]> {
+  searchPost(searchText: string): Observable<Tweet[]> {
     if (searchText === '') {
       return this.originalPostList$;
     }
@@ -50,11 +49,11 @@ export class PostService {
   }
 
   // HTTP
-  getPosts(): Observable<IPost[]> {
-    return this.http.get<IPost[]>(`${this.basicUrl}/posts`);
+  getPosts(): Observable<Tweet[]> {
+    return this.http.get<Tweet[]>(`${this.basicUrl}/posts`);
   }
 
-  getPostDetails(postNumber: number): Observable <IPost> {
-    return this.http.get<IPost>(`${this.basicUrl}/posts/${postNumber}`);
+  getPostDetails(postNumber: number): Observable<Tweet> {
+    return this.http.get<Tweet>(`${this.basicUrl}/posts/${postNumber}`);
   }
 }

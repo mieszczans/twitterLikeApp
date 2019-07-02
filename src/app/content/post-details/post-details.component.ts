@@ -1,8 +1,10 @@
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { IPost } from '../models/post';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Tweet } from '../models/post';
 import { PostService } from '../services/post.service';
+import { ErrorModalComponent } from '../error-modal/error-modal.component';
 
 @Component({
   selector: 'app-post-details',
@@ -10,12 +12,22 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./post-details.component.less']
 })
 export class PostDetailsComponent implements OnInit, OnDestroy {
-  public postDetails: IPost;
+  public postDetails: Tweet;
   private subscription: Subscription;
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostService) { }
+  private bsModalRef: BsModalRef;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private postService: PostService,
+    private bsModalService: BsModalService
+  ) { }
 
   ngOnInit() {
-    this.postDetails = this.activatedRoute.snapshot.data['postDetails'];
+    this.activatedRoute.data.subscribe(
+      (data) => this.postDetails = data.value,
+      () => {
+        this.bsModalRef = this.bsModalService.show(ErrorModalComponent);
+      }
+    );
     this.subscription = this.postService.originalPostList$.subscribe(
       (posts) => {
         this.findPost(posts);
@@ -23,7 +35,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  findPost(posts: IPost[]) {
+  findPost(posts: Tweet[]) {
     if (posts) {
       const foundPost = posts.find(
         (post) => post.id === this.postDetails.id && post.userId === this.postDetails.userId
@@ -32,7 +44,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  addFakeName(foundPost: IPost) {
+  addFakeName(foundPost: Tweet) {
     if (foundPost) {
       this.postDetails.fakeName = foundPost.fakeName;
     }

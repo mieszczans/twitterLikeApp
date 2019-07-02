@@ -1,4 +1,6 @@
-import { IPost } from '../models/post';
+import { ErrorModalComponent } from './../error-modal/error-modal.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Tweet } from '../models/post';
 import { PostService } from '../services/post.service';
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate } from '@angular/animations';
@@ -19,9 +21,11 @@ import { map } from 'rxjs/operators';
   ]
 })
 export class PostListComponent implements OnInit {
+  bsModalRef: BsModalRef;
   public canBeTriggered = true;
   constructor(
     public postService: PostService,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit() {
@@ -33,14 +37,14 @@ export class PostListComponent implements OnInit {
         this.postService.addPostsToSubject(reversed);
       },
       (err) => {
-        console.log(err);
+        this.bsModalRef = this.modalService.show(ErrorModalComponent);
       }
     );
   }
 
-  mapPostsForFakeName(posts: IPost[]): IPost[] {
+  mapPostsForFakeName(posts: Tweet[]): Tweet[] {
     const withFakeNames = posts.map(
-      (post: IPost) => {
+      (post: Tweet) => {
         return ({
           userId: post.userId,
           id: post.id,
