@@ -23,16 +23,27 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(
-      (data) => this.postDetails = data.value,
+      (data) => {
+        this.postDetails = data.postDetails;
+        this.checkIfFakeName();
+      },
       () => {
         this.bsModalRef = this.bsModalService.show(ErrorModalComponent);
       }
     );
+  }
+
+  checkIfFakeName() {
     this.subscription = this.postService.originalPostList$.subscribe(
       (posts) => {
-        this.findPost(posts);
+        if (posts && posts[0]) {
+          this.findPost(posts);
+          return;
+        }
+        this.postDetails.fakeName = this.postService.createFakeName();
       }
     );
+
   }
 
   findPost(posts: Tweet[]) {
