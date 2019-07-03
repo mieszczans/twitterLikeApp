@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   showAlert = false;
-  protected model: {username: string, password: string} = { username: '', password: '' };
+  model: {username: string, password: string} = { username: '', password: '' };
   constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
